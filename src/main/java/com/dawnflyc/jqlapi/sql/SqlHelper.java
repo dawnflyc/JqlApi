@@ -23,6 +23,7 @@ public class SqlHelper {
             if (impls.size() > 1) {
                 throw new RuntimeException("Jql实现多于一个");
             }
+            dbHandle = (ISqlHandle) impls.toArray()[0];
         }
         return dbHandle;
     }
