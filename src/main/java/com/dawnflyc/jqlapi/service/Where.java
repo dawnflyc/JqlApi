@@ -1,8 +1,9 @@
 package com.dawnflyc.jqlapi.service;
 
 import com.dawnflyc.jqlapi.ParamHandle;
-import com.dawnflyc.jqlapi.PreParamManage;
 import com.dawnflyc.jqlapi.StringUtils;
+import com.dawnflyc.jqlapi.sql.IPreParamManage;
+import com.dawnflyc.jqlapi.sql.SqlHelper;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -21,7 +22,7 @@ public class Where {
     /**
      * 预编译参数管理器
      */
-    private final PreParamManage preParamManage;
+    private final IPreParamManage preParamManage;
     /**
      * root 语句
      */
@@ -33,32 +34,32 @@ public class Where {
 
     public Where() {
         this.paramHandle = ParamHandle.ignoreNull;
-        this.preParamManage = new PreParamManage();
+        this.preParamManage = SqlHelper.getPreParamManageFactory().create();
     }
 
     public Where(ParamHandle paramHandle) {
         this.paramHandle = paramHandle;
-        this.preParamManage = new PreParamManage();
+        this.preParamManage = SqlHelper.getPreParamManageFactory().create();
     }
 
     public Where(WhereStatement root) {
         this.root = root;
         this.current = root;
         this.paramHandle = ParamHandle.ignoreNull;
-        this.preParamManage = new PreParamManage();
+        this.preParamManage = SqlHelper.getPreParamManageFactory().create();
     }
 
-    public Where(PreParamManage preParamManage) {
+    public Where(IPreParamManage preParamManage) {
         this.preParamManage = preParamManage;
         this.paramHandle = ParamHandle.ignoreNull;
     }
 
-    public Where(ParamHandle paramHandle, PreParamManage preParamManage) {
+    public Where(ParamHandle paramHandle, IPreParamManage preParamManage) {
         this.paramHandle = paramHandle;
         this.preParamManage = preParamManage;
     }
 
-    public Where(WhereStatement root, ParamHandle paramHandle, PreParamManage preParamManage) {
+    public Where(WhereStatement root, ParamHandle paramHandle, IPreParamManage preParamManage) {
         this.root = root;
         this.current = root;
         this.paramHandle = paramHandle;

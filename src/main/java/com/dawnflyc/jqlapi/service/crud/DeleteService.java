@@ -28,9 +28,7 @@ public class DeleteService extends WhereSql<DeleteService, Integer> {
     }
 
     @Override
-    public Integer execute() {
-        int result = sqlHandle.delete(getSql(), getStringParam());
-        this.closeParam();
-        return result;
+    protected Integer query() {
+        return sqlHandle.delete(getSql(), getStringParam());
     }
 }

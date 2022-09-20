@@ -48,10 +48,8 @@ public class InsertService extends AbstractSql<InsertService, Integer> {
     }
 
     @Override
-    public Integer execute() {
-        Integer result = sqlHandle.insert(getSql(), getStringParam());
-        this.closeParam();
-        return result;
+    protected Integer query() {
+        return sqlHandle.insert(getSql(), getStringParam());
     }
 
     /**

@@ -68,10 +68,8 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
     }
 
     @Override
-    public List<Map<String, Object>> execute() {
-        List<Map<String, Object>> result = sqlHandle.select(getSql(), getStringParam());
-        this.closeParam();
-        return result;
+    protected List<Map<String, Object>> query() {
+        return sqlHandle.select(getSql(), getStringParam());
     }
 
     /**

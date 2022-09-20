@@ -55,9 +55,7 @@ public class UpdateService extends WhereSql<UpdateService, Integer> {
     }
 
     @Override
-    public Integer execute() {
-        int result = sqlHandle.update(getSql(), getStringParam());
-        this.closeParam();
-        return result;
+    protected Integer query() {
+        return sqlHandle.update(getSql(), getStringParam());
     }
 }
