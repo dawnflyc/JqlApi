@@ -94,6 +94,13 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
     }
 
     /**
+     * 查询记录数
+     */
+    public Integer executeGetCount(String field) {
+        return Integer.parseInt(executeGetOne().get("count").toString());
+    }
+
+    /**
      * 设置查询字段
      */
     public SelectService field(String field) {
