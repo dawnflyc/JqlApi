@@ -96,8 +96,8 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
     /**
      * 查询值
      */
-    public Integer executeGetOneValue(String field) {
-        return Integer.parseInt(executeGetOne().get(field).toString());
+    public Object executeGetOneValue(String field) {
+        return executeGetOne().get(field);
     }
 
     /**
