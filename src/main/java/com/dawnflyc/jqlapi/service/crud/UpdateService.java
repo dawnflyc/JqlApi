@@ -2,10 +2,15 @@ package com.dawnflyc.jqlapi.service.crud;
 
 
 import com.dawnflyc.jqlapi.ParamHandle;
+import com.dawnflyc.jqlapi.StringUtils;
 import com.dawnflyc.jqlapi.service.WhereSql;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UpdateService extends WhereSql<UpdateService, Integer> {
 
@@ -32,6 +37,26 @@ public class UpdateService extends WhereSql<UpdateService, Integer> {
 
     public UpdateService set(Map<String, Object> data) {
         this.data.putAll(data);
+        return this;
+    }
+
+    /**
+     * 通过实体类修改
+     * @param entity 实体类对象
+     * @param ignoreFields 忽略字段-类字段
+     */
+    public UpdateService set(Object entity,String ... ignoreFields) {
+        Field[] declaredFields = entity.getClass().getDeclaredFields();
+        List<String> collect = Arrays.stream(declaredFields).map(Field::getName).collect(Collectors.toList());
+        for (Field declaredField : declaredFields) {
+            if(!collect.contains(declaredField.getName())){
+                try {
+                    set(StringUtils.toUnderScoreCase(declaredField.getName()),declaredField.get(entity));
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
         return this;
     }
 

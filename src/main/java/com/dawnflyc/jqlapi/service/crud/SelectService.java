@@ -5,6 +5,7 @@ import com.dawnflyc.jqlapi.ParamHandle;
 import com.dawnflyc.jqlapi.StringUtils;
 import com.dawnflyc.jqlapi.service.WhereSql;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -98,6 +99,29 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
      */
     public Object executeGetOneValue(String field) {
         return executeGetOne().get(field);
+    }
+
+    /**
+     * 查询转换成实体类
+     * @param entityClass 实体类类型
+     * @return 实体类对象
+     * @param <T> 实体类
+     */
+    public <T> T  executeGetEntity(Class<T> entityClass){
+        Map<String, Object> stringObjectMap = executeGetOne();
+        Field[] declaredFields = entityClass.getDeclaredFields();
+       try {
+           T t = entityClass.newInstance();
+           for (Field declaredField : declaredFields) {
+               String field = StringUtils.toUnderScoreCase(declaredField.getName());
+               if(stringObjectMap.containsKey(field)){
+                   declaredField.set(t,stringObjectMap.get(field));
+               }
+           }
+           return t;
+       } catch (InstantiationException | IllegalAccessException e) {
+           throw new RuntimeException(e);
+       }
     }
 
     /**
