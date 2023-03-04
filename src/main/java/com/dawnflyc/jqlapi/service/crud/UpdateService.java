@@ -45,7 +45,7 @@ public class UpdateService extends WhereSql<UpdateService, Integer> {
      * @param entity 实体类对象
      * @param ignoreFields 忽略字段-类字段
      */
-    public UpdateService set(Object entity,String ... ignoreFields) {
+    public UpdateService setByEntity(Object entity,String ... ignoreFields) {
         Field[] declaredFields = entity.getClass().getDeclaredFields();
         List<String> collect = Arrays.stream(declaredFields).map(Field::getName).collect(Collectors.toList());
         for (Field declaredField : declaredFields) {

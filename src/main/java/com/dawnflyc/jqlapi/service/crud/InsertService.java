@@ -77,7 +77,7 @@ public class InsertService extends AbstractSql<InsertService, Object> {
      * @param entity 实体类对象
      * @param ignoreFields 忽略字段-类字段
      */
-    public InsertService add(Object entity,String ... ignoreFields) {
+    public InsertService addByEntity(Object entity,String ... ignoreFields) {
         Field[] declaredFields = entity.getClass().getDeclaredFields();
         List<String> collect = Arrays.stream(declaredFields).map(Field::getName).collect(Collectors.toList());
         for (Field declaredField : declaredFields) {
