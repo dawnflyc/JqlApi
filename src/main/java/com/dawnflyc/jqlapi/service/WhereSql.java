@@ -66,12 +66,12 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
         return (Children) this;
     }
 
-    public Children WhereIs(String field){
-        where.where(field, "is" ,"null");
+    public Children WhereIs(String field,Object value){
+        where.where(field, "is" ,value);
         return (Children) this;
     }
-    public Children WhereNotIs(String field){
-        where.where(field, "is not" ,"null");
+    public Children WhereNotIs(String field,Object value){
+        where.where(field, "is not" ,value);
         return (Children) this;
     }
 
