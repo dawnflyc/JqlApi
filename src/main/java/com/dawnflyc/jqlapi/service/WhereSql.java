@@ -152,7 +152,7 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
      * @param sql sql语句
      * @return this
      */
-    public Children where(String sql,Object ... params) {
+    public Children whereSql(String sql,Object ... params) {
         this.where.where(sql,params);
         return (Children) this;
     }
