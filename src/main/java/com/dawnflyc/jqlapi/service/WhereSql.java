@@ -87,6 +87,11 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
         this.where.whereAnd(where, tied);
         return (Children) this;
     }
+
+    public Children whereAnd(Map<String, Object> where) {
+        return whereAnd(where, false);
+    }
+
     /**
      * 同键多值语句
      * @param key 键
@@ -98,8 +103,16 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
         where.whereAnd(key,symbol,values,tied);
         return (Children)this;
     }
+    public Children whereAnd(String key,String symbol, Collection<?> values){
+        whereAnd(key,"=",values,true);
+        return (Children)this;
+    }
     public Children whereAnd(String key, Collection<?> values,Boolean tied){
         whereAnd(key,"=",values,tied);
+        return (Children)this;
+    }
+    public Children whereAnd(String key, Collection<?> values){
+        whereAnd(key,values,true);
         return (Children)this;
     }
 
@@ -115,6 +128,10 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
         return (Children) this;
     }
 
+    public Children whereOr(Map<String, Object> where) {
+        return whereOr(where, false);
+    }
+
     /**
      * 同键多值语句
      * @param key 键
@@ -126,8 +143,16 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
         where.whereOr(key,symbol,values,tied);
         return (Children)this;
     }
+    public Children whereOr(String key, String symbol, Collection<?> values){
+        where.whereOr(key,symbol,values,false);
+        return (Children)this;
+    }
     public Children whereOr(String key, Collection<?> values, Boolean tied){
         whereOr(key,"=",values,tied);
+        return (Children)this;
+    }
+    public Children whereOr(String key, Collection<?> values){
+        whereOr(key,"=",values,false);
         return (Children)this;
     }
     /**
