@@ -138,6 +138,15 @@ public class Where {
         return this;
     }
 
+    public Where WhereIs(String field){
+        where(field, "is" ,"null");
+        return this;
+    }
+    public Where WhereNotIs(String field){
+        where(field, "is not" ,"null");
+        return this;
+    }
+
     /**
      * 多个where语句 and
      *
