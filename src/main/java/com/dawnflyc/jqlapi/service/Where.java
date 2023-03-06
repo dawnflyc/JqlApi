@@ -138,12 +138,12 @@ public class Where {
         return this;
     }
 
-    public Where WhereIs(String field){
-        where(field, "is" ,"null");
+    public Where WhereIs(String field, Object value){
+        where(field, "is" ,value);
         return this;
     }
-    public Where WhereNotIs(String field){
-        where(field, "is not" ,"null");
+    public Where WhereNotIs(String field, Object value){
+        where(field, "is not" ,value);
         return this;
     }
 
