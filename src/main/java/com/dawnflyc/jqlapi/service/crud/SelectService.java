@@ -91,14 +91,22 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
         if (fields.size() > 0) {
             fields.clear();
         }
-        return Integer.parseInt(field("count(1) as count").executeGetOne().get("count").toString());
+        Map<String, Object> stringObjectMap = field("count(1) as count").executeGetOne();
+        if(stringObjectMap==null){
+            throw new RuntimeException("没有数据");
+        }
+        return Integer.parseInt(stringObjectMap.get("count").toString());
     }
 
     /**
      * 查询值
      */
     public Object executeGetOneValue(String field) {
-        return executeGetOne().get(field);
+        Map<String, Object> stringObjectMap = executeGetOne();
+        if(stringObjectMap == null){
+            throw new RuntimeException("没有数据");
+        }
+        return stringObjectMap.get(field);
     }
 
     /**
