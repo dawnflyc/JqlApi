@@ -71,7 +71,7 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
         return (Children) this;
     }
     public Children WhereNotIs(String field,Object value){
-        where.where(field, "is not" ,value);
+        where.where(field, "not is" ,value);
         return (Children) this;
     }
 
