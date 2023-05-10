@@ -2,9 +2,12 @@ package com.dawnflyc.jqlapi.service;
 
 
 import com.dawnflyc.jqlapi.ParamHandle;
+import com.dawnflyc.jqlapi.config.ConfigManage;
 import com.dawnflyc.jqlapi.sql.IPreParamManage;
 import com.dawnflyc.jqlapi.sql.ISqlHandle;
 import com.dawnflyc.jqlapi.sql.SqlHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -14,7 +17,12 @@ import java.util.Map;
  */
 public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> {
 
+    private static final Logger logger = LoggerFactory.getLogger(AbstractSql.class);
 
+    /**
+     * 创建时间
+     */
+    private final long time = System.currentTimeMillis();
     /**
      * mapper
      */
@@ -31,6 +39,7 @@ public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> 
      * 表名
      */
     protected String table;
+
 
     public AbstractSql(String table, ParamHandle paramHandle) {
         this.table = table;
@@ -81,7 +90,14 @@ public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> 
     protected abstract R query();
 
     public R execute() {
+        long executeTime = System.currentTimeMillis();
+        if(ConfigManage.getConfig().isPrintRuntime()){
+            logger.debug("sql构建器构建时间: {}毫秒",executeTime - this.time);
+        }
         R query = query();
+        if(ConfigManage.getConfig().isPrintRuntime()){
+            logger.debug("sql构建器执行时间: {}毫秒",System.currentTimeMillis() - executeTime);
+        }
         preParamManage.done();
         return query;
     }

@@ -26,6 +26,11 @@
             <version>2.0.4</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.3.0</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
