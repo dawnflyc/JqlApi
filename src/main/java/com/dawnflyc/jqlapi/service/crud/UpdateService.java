@@ -80,7 +80,7 @@ public class UpdateService extends WhereSql<UpdateService, Integer> {
     }
 
     @Override
-    protected Integer query() {
-        return sqlHandle.update(getSql(), getStringParam());
+    protected Integer query(String sql, Map<String,Object> params) {
+        return sqlHandle.update(sql, params);
     }
 }

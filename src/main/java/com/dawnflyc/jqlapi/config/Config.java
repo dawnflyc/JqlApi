@@ -7,6 +7,8 @@ package com.dawnflyc.jqlapi.config;
 public class Config {
     //是否打印运行时间
     private Boolean printRuntime;
+    //打印sql
+    private Boolean printSql;
 
 
     public Boolean getPrintRuntime() {
@@ -15,5 +17,13 @@ public class Config {
 
     public void setPrintRuntime(Boolean printRuntime) {
         this.printRuntime = printRuntime;
+    }
+
+    public Boolean getPrintSql() {
+        return printSql;
+    }
+
+    public void setPrintSql(Boolean printSql) {
+        this.printSql = printSql;
     }
 }

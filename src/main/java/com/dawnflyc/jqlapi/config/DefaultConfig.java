@@ -4,5 +4,6 @@ public class DefaultConfig extends Config {
 
     public DefaultConfig() {
         this.setPrintRuntime(false);
+        this.setPrintRuntime(false);
     }
 }

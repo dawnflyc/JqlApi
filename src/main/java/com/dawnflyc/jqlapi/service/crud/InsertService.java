@@ -48,8 +48,8 @@ public class InsertService extends AbstractSql<InsertService, Object> {
     }
 
     @Override
-    protected Object query() {
-        return sqlHandle.insert(getSql(), getStringParam());
+    protected Object query(String sql, Map<String,Object> params) {
+        return sqlHandle.insert(sql, params);
     }
 
     /**

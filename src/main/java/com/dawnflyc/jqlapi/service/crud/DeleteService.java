@@ -5,6 +5,8 @@ import com.dawnflyc.jqlapi.ParamHandle;
 import com.dawnflyc.jqlapi.StringUtils;
 import com.dawnflyc.jqlapi.service.WhereSql;
 
+import java.util.Map;
+
 /**
  * 删除服务
  */
@@ -28,7 +30,7 @@ public class DeleteService extends WhereSql<DeleteService, Integer> {
     }
 
     @Override
-    protected Integer query() {
-        return sqlHandle.delete(getSql(), getStringParam());
+    protected Integer query(String sql, Map<String,Object> params) {
+        return sqlHandle.delete(sql, params);
     }
 }

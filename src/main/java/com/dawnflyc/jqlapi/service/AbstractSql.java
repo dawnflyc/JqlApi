@@ -87,7 +87,7 @@ public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> 
      *
      * @return
      */
-    protected abstract R query();
+    protected abstract R query(String sql,Map<String,Object> params);
 
     public R execute() {
         long executeTime = System.currentTimeMillis();
@@ -96,7 +96,14 @@ public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> 
         }
         R query =null;
         try {
-            query = query();
+            String sql = getSql();
+            Map<String, Object> param = getStringParam();
+            if(ConfigManage.getConfig().getPrintSql()){
+                logger.debug("sql构建器，sql语句： {}",sql);
+                logger.debug("sql构建器，sql参数： {}",sql);
+
+            }
+            query = query(sql,param);
         }finally {
             if(ConfigManage.getConfig().getPrintRuntime()){
                 logger.debug("sql构建器执行时间: {}毫秒",System.currentTimeMillis() - executeTime);
