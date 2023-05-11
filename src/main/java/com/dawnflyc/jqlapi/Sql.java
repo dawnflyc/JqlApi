@@ -22,7 +22,7 @@ public class Sql {
     // ?当占位符
     public static Object insert(String sql, Object... params) {
         Long start = null;
-        if (ConfigManage.getConfig().isPrintRuntime()) {
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             start = System.currentTimeMillis();
         }
         IPreParamManage preParamManage = SqlHelper.getPreParamManageFactory().create();
@@ -32,12 +32,12 @@ public class Sql {
             realParams[i] = preParamManage.allocPreParam(param);
         }
         Long buildTime = null;
-        if (ConfigManage.getConfig().isPrintRuntime()) {
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             buildTime =System.currentTimeMillis();
             logger.debug("Sql构建时间: {}毫秒", buildTime - start);
         }
         Object insert = dbHandle.insert(StringUtils.format(sql, realParams), preParamManage.toParams());
-        if(ConfigManage.getConfig().isPrintRuntime()){
+        if(ConfigManage.getConfig().getPrintRuntime()){
             logger.debug("Sql执行时间: {}毫秒", System.currentTimeMillis() - buildTime);
         }
         return insert;
@@ -45,7 +45,7 @@ public class Sql {
 
     public static Integer update(String sql, Object... params) {
         Long start = null;
-        if (ConfigManage.getConfig().isPrintRuntime()) {
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             start = System.currentTimeMillis();
         }
         IPreParamManage preParamManage = SqlHelper.getPreParamManageFactory().create();
@@ -55,12 +55,12 @@ public class Sql {
             realParams[i] =preParamManage.allocPreParam(param);
         }
         Long buildTime = null;
-        if (ConfigManage.getConfig().isPrintRuntime()) {
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             buildTime =System.currentTimeMillis();
             logger.debug("Sql构建时间: {}毫秒", buildTime - start);
         }
         int update = dbHandle.update(StringUtils.format(sql, realParams), preParamManage.toParams());
-        if(ConfigManage.getConfig().isPrintRuntime()){
+        if(ConfigManage.getConfig().getPrintRuntime()){
             logger.debug("Sql执行时间: {}毫秒", System.currentTimeMillis() - buildTime);
         }
         return update;
@@ -69,7 +69,7 @@ public class Sql {
 
     public static List<Map<String, Object>> select(String sql, Object... params) {
         Long start = null;
-        if (ConfigManage.getConfig().isPrintRuntime()) {
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             start = System.currentTimeMillis();
         }
         IPreParamManage preParamManage = SqlHelper.getPreParamManageFactory().create();
@@ -79,12 +79,12 @@ public class Sql {
             realParams[i] =preParamManage.allocPreParam(param);
         }
         Long buildTime = null;
-        if (ConfigManage.getConfig().isPrintRuntime()) {
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             buildTime =System.currentTimeMillis();
             logger.debug("Sql构建时间: {}毫秒", buildTime - start);
         }
         List<Map<String, Object>> select = dbHandle.select(StringUtils.format(sql, realParams), preParamManage.toParams());
-        if(ConfigManage.getConfig().isPrintRuntime()){
+        if(ConfigManage.getConfig().getPrintRuntime()){
             logger.debug("Sql执行时间: {}毫秒", System.currentTimeMillis() - buildTime);
         }
         return select;
@@ -93,7 +93,7 @@ public class Sql {
 
     public static Integer delete(String sql, Object... params) {
         Long start = null;
-        if (ConfigManage.getConfig().isPrintRuntime()) {
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             start = System.currentTimeMillis();
         }
         IPreParamManage preParamManage = SqlHelper.getPreParamManageFactory().create();
@@ -103,12 +103,12 @@ public class Sql {
             realParams[i] =preParamManage.allocPreParam(param);
         }
         Long buildTime = null;
-        if (ConfigManage.getConfig().isPrintRuntime()) {
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             buildTime =System.currentTimeMillis();
             logger.debug("Sql构建时间: {}毫秒", buildTime - start);
         }
         int delete = dbHandle.delete(StringUtils.format(sql, realParams), preParamManage.toParams());
-        if(ConfigManage.getConfig().isPrintRuntime()){
+        if(ConfigManage.getConfig().getPrintRuntime()){
             logger.debug("Sql执行时间: {}毫秒", System.currentTimeMillis() - buildTime);
         }
         return delete;

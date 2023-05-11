@@ -91,11 +91,11 @@ public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> 
 
     public R execute() {
         long executeTime = System.currentTimeMillis();
-        if(ConfigManage.getConfig().isPrintRuntime()){
+        if(ConfigManage.getConfig().getPrintRuntime()){
             logger.debug("sql构建器构建时间: {}毫秒",executeTime - this.time);
         }
         R query = query();
-        if(ConfigManage.getConfig().isPrintRuntime()){
+        if(ConfigManage.getConfig().getPrintRuntime()){
             logger.debug("sql构建器执行时间: {}毫秒",System.currentTimeMillis() - executeTime);
         }
         preParamManage.done();
