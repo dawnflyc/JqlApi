@@ -24,7 +24,7 @@ public class ConfigManage {
                     String replace = method.getName().replace("set", "");
                     String c = Character.toString(replace.charAt(0));
                     replace = c.toLowerCase(Locale.ROOT) + replace.replace(c,"");
-                    Field field = Config.class.getField(replace);
+                    Field field = Config.class.getDeclaredField(replace);
                     field.setAccessible(true);
                     Object value = field.get(currentConfig);
                     if(value==null){
