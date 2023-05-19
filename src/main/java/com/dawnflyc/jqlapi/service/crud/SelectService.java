@@ -93,7 +93,7 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
         }
         Map<String, Object> stringObjectMap = field("count(1) as count").executeGetOne();
         if(stringObjectMap==null){
-            throw new RuntimeException("没有数据");
+            return 0;
         }
         return Integer.parseInt(stringObjectMap.get("count").toString());
     }
@@ -104,7 +104,7 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
     public Object executeGetOneValue(String field) {
         Map<String, Object> stringObjectMap = executeGetOne();
         if(stringObjectMap == null){
-            throw new RuntimeException("没有数据");
+            return null;
         }
         return stringObjectMap.get(field);
     }
