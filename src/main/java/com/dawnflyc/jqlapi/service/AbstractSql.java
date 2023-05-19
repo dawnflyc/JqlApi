@@ -101,7 +101,6 @@ public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> 
             if(ConfigManage.getConfig().getPrintSql()){
                 logger.debug("sql构建器，sql语句： {}",sql);
                 logger.debug("sql构建器，sql参数： {}",param);
-
             }
             query = query(sql,param);
         }finally {
