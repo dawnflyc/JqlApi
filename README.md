@@ -28,7 +28,7 @@
 
     相比MP，改的更彻底了
 
-三、基础用法展示
+三、用法展示
 
     增加：`Curd.insert("表名").add("name","张三").add("age","15").execute()`
 
@@ -38,9 +38,12 @@
 
     查询：`Curd.select("表名").where("id",13).execute()`
 
-    说明： 表名后面有一个可选参数，是空处理参数，对于null值，是查还是不查，默认忽略空(null和空字符串)
+    说明： 
+        1、表名后面有一个可选参数，是空处理参数，对于null值，是查还是不查，默认忽略空(null和空字符串) 
+        2、现在基本上sql的大部分操作都实现了
 
-    直接sql： Sql.select("select * from user where id = ? ",1)  说明： 增删改查有不同的方法，参数是预编译的，以？当作参数占位符
+    直接sql语句： Sql.select("select * from user where id = ? ",1)  说明： 增删改查有不同的方法，参数是预编译的，以？当作参数占位符
+
 
 四、实现
 
@@ -48,8 +51,45 @@
 
     jdbc: https://github.com/dawnflyc/JqlJdbc
 
-五、说明
+五、在springboot环境下如何开始使用
 
-作者是一介菜鸟，有什么问题、瑕疵、没考虑到的地方、更好的方案，联系作者一起交流，为Jql贡献属于自己的一份力。
+    1、pom导入此包以及mybatis-boot实现包
+    2、组件扫描包(ComponentScan) com.dawnflyc.jqlmb
+    3、数据库涉及时间需要在配置文件里面加上时间格式化
+        spring:      
+            jackson:
+                date-format: yyyy-MM-dd HH:mm:ss
+                time-zone: Asia/Shanghai
+    4、(可选)打印sql语句以方便调试
+        在Main方法中修改配置文件 ConfigManage.getConfig().setPrintSql(true);
+        然后在配置文件中增加日志输出
+        logging:
+            com.dawnflyc: debug
+    5、(可选)打印执行时间
+        在Main方法中修改配置文件 ConfigManage.getConfig().setPrintRuntime(true);
 
-关于如何导入，目前正在研究。或者作者打个发行包，在本地安装？
+六、如何导入Maven
+
+    因为不会搞maven仓库，所以只能用本地导入
+    1、将jar包放到项目的一个地方 比如根目录下的libs目录
+    2、pom增加以下内容
+        <dependency>
+        <groupId>com.dawnflyc</groupId>
+        <artifactId>JqlApi</artifactId>
+        <version>0.1.1.20</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/libs/JqlApi-0.1.1.20.jar</systemPath>
+        </dependency>
+    3、实现包也是这样导入
+    4、在spring插件 spring-boot-maven-plugin 添加一句
+        <includeSystemScope>true</includeSystemScope>
+        可以让本地导入的包在打包的时候打进包里，不然部署的时候会找不到
+
+七、说明
+
+    1、版本对应
+        jql的版本示例：0.1.1.20  0.1.1是api的兼容版本 20则api下的版本
+        实现包的版本示例 0.1.0-api0.1.1  0.1.0则是实现包自己的版本 后面的是兼容jql的版本
+
+作者是一介菜鸟，有什么问题、瑕疵、没考虑到的地方、更好的方案，联系作者一起交流，可以为Jql贡献属于自己的一份力。
+

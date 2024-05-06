@@ -63,7 +63,7 @@ public class UpdateService extends WhereSql<UpdateService, Integer> {
     @Override
     public String getSql() {
         StringBuilder sql = new StringBuilder();
-        data.entrySet().removeIf(entry -> paramHandle.test(entry.getKey(), entry.getValue(), "update"));
+//        data.entrySet().removeIf(entry -> paramHandle.test(entry.getKey(), entry.getValue(), "update"));
         sql.append("UPDATE ").append(table);
         if (!data.isEmpty()) {
             sql.append(" SET ");

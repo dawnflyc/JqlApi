@@ -31,8 +31,6 @@ public class ConfigManage {
                     Object value = field.get(currentConfig);
                     if(value==null){
                         method.invoke(currentConfig,args);
-                    }else {
-                        logger.error("config只能修改一次");
                     }
                 }
                 if (method.getName().startsWith("get")){
