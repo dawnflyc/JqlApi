@@ -5,7 +5,6 @@ import com.dawnflyc.jqlapi.ParamHandle;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -66,12 +65,13 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
         return (Children) this;
     }
 
-    public Children WhereIs(String field,Object value){
-        where.where(field, "is" ,value);
+    public Children WhereIs(String field, Object value) {
+        where.where(field, "is", value);
         return (Children) this;
     }
-    public Children WhereNotIs(String field,Object value){
-        where.where(field, "not is" ,value);
+
+    public Children WhereNotIs(String field, Object value) {
+        where.where(field, "not is", value);
         return (Children) this;
     }
 
@@ -94,26 +94,30 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
 
     /**
      * 同键多值语句
-     * @param key 键
+     *
+     * @param key    键
      * @param symbol 符号
      * @param values 值
-     * @param tied 是否加括号
+     * @param tied   是否加括号
      */
-    public Children whereAnd(String key, String symbol, Collection<?> values, Boolean tied){
-        where.whereAnd(key,symbol,values,tied);
-        return (Children)this;
+    public Children whereAnd(String key, String symbol, Collection<?> values, Boolean tied) {
+        where.whereAnd(key, symbol, values, tied);
+        return (Children) this;
     }
-    public Children whereAnd(String key,String symbol, Collection<?> values){
-        whereAnd(key,"=",values,true);
-        return (Children)this;
+
+    public Children whereAnd(String key, String symbol, Collection<?> values) {
+        whereAnd(key, "=", values, true);
+        return (Children) this;
     }
-    public Children whereAnd(String key, Collection<?> values,Boolean tied){
-        whereAnd(key,"=",values,tied);
-        return (Children)this;
+
+    public Children whereAnd(String key, Collection<?> values, Boolean tied) {
+        whereAnd(key, "=", values, tied);
+        return (Children) this;
     }
-    public Children whereAnd(String key, Collection<?> values){
-        whereAnd(key,values,true);
-        return (Children)this;
+
+    public Children whereAnd(String key, Collection<?> values) {
+        whereAnd(key, values, true);
+        return (Children) this;
     }
 
     /**
@@ -134,35 +138,40 @@ public abstract class WhereSql<Children extends WhereSql<Children, R>, R> extend
 
     /**
      * 同键多值语句
-     * @param key 键
+     *
+     * @param key    键
      * @param symbol 符号
      * @param values 值
-     * @param tied 是否加括号
+     * @param tied   是否加括号
      */
-    public Children whereOr(String key, String symbol, Collection<?> values, Boolean tied){
-        where.whereOr(key,symbol,values,tied);
-        return (Children)this;
+    public Children whereOr(String key, String symbol, Collection<?> values, Boolean tied) {
+        where.whereOr(key, symbol, values, tied);
+        return (Children) this;
     }
-    public Children whereOr(String key, String symbol, Collection<?> values){
-        where.whereOr(key,symbol,values,false);
-        return (Children)this;
+
+    public Children whereOr(String key, String symbol, Collection<?> values) {
+        where.whereOr(key, symbol, values, false);
+        return (Children) this;
     }
-    public Children whereOr(String key, Collection<?> values, Boolean tied){
-        whereOr(key,"=",values,tied);
-        return (Children)this;
+
+    public Children whereOr(String key, Collection<?> values, Boolean tied) {
+        whereOr(key, "=", values, tied);
+        return (Children) this;
     }
-    public Children whereOr(String key, Collection<?> values){
-        whereOr(key,"=",values,false);
-        return (Children)this;
+
+    public Children whereOr(String key, Collection<?> values) {
+        whereOr(key, "=", values, false);
+        return (Children) this;
     }
+
     /**
      * 直接写sql
      *
      * @param sql sql语句
      * @return this
      */
-    public Children whereSql(String sql,Object ... params) {
-        this.where.where(sql,params);
+    public Children whereSql(String sql, Object... params) {
+        this.where.where(sql, params);
         return (Children) this;
     }
 

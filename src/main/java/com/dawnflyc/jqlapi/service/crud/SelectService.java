@@ -69,7 +69,7 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
     }
 
     @Override
-    protected List<Map<String, Object>> query(String sql, Map<String,Object> params) {
+    protected List<Map<String, Object>> query(String sql, Map<String, Object> params) {
         return sqlHandle.select(sql, params);
     }
 
@@ -92,7 +92,7 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
             fields.clear();
         }
         Map<String, Object> stringObjectMap = field("count(1) as count").executeGetOne();
-        if(stringObjectMap==null){
+        if (stringObjectMap == null) {
             return 0;
         }
         return Integer.parseInt(stringObjectMap.get("count").toString());
@@ -103,7 +103,7 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
      */
     public Object executeGetOneValue(String field) {
         Map<String, Object> stringObjectMap = executeGetOne();
-        if(stringObjectMap == null){
+        if (stringObjectMap == null) {
             return null;
         }
         return stringObjectMap.get(field);
@@ -111,25 +111,26 @@ public class SelectService extends WhereSql<SelectService, List<Map<String, Obje
 
     /**
      * 查询转换成实体类
+     *
      * @param entityClass 实体类类型
+     * @param <T>         实体类
      * @return 实体类对象
-     * @param <T> 实体类
      */
-    public <T> T  executeGetEntity(Class<T> entityClass){
+    public <T> T executeGetEntity(Class<T> entityClass) {
         Map<String, Object> stringObjectMap = executeGetOne();
         Field[] declaredFields = entityClass.getDeclaredFields();
-       try {
-           T t = entityClass.newInstance();
-           for (Field declaredField : declaredFields) {
-               String field = StringUtils.toUnderScoreCase(declaredField.getName());
-               if(stringObjectMap.containsKey(field)){
-                   declaredField.set(t,stringObjectMap.get(field));
-               }
-           }
-           return t;
-       } catch (InstantiationException | IllegalAccessException e) {
-           throw new RuntimeException(e);
-       }
+        try {
+            T t = entityClass.newInstance();
+            for (Field declaredField : declaredFields) {
+                String field = StringUtils.toUnderScoreCase(declaredField.getName());
+                if (stringObjectMap.containsKey(field)) {
+                    declaredField.set(t, stringObjectMap.get(field));
+                }
+            }
+            return t;
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

@@ -6,7 +6,7 @@
 
     <groupId>com.dawnflyc</groupId>
     <artifactId>JqlApi</artifactId>
-    <version>0.1.1.21</version>
+    <version>0.1.1api-0.0.21</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -32,14 +32,4 @@
             <version>3.3.0</version>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>public</id>
-            <name>aliyun nexus</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
 </project>

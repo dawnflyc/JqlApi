@@ -33,11 +33,11 @@ public class Sql {
         }
         Long buildTime = null;
         if (ConfigManage.getConfig().getPrintRuntime()) {
-            buildTime =System.currentTimeMillis();
+            buildTime = System.currentTimeMillis();
             logger.debug("Sql构建时间: {}毫秒", buildTime - start);
         }
         Object insert = dbHandle.insert(StringUtils.format(sql, realParams), preParamManage.toParams());
-        if(ConfigManage.getConfig().getPrintRuntime()){
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             logger.debug("Sql执行时间: {}毫秒", System.currentTimeMillis() - buildTime);
         }
         return insert;
@@ -49,18 +49,18 @@ public class Sql {
             start = System.currentTimeMillis();
         }
         IPreParamManage preParamManage = SqlHelper.getPreParamManageFactory().create();
-        Object [] realParams = new Object[params.length];
+        Object[] realParams = new Object[params.length];
         for (int i = 0; i < params.length; i++) {
             Object param = params[i];
-            realParams[i] =preParamManage.allocPreParam(param);
+            realParams[i] = preParamManage.allocPreParam(param);
         }
         Long buildTime = null;
         if (ConfigManage.getConfig().getPrintRuntime()) {
-            buildTime =System.currentTimeMillis();
+            buildTime = System.currentTimeMillis();
             logger.debug("Sql构建时间: {}毫秒", buildTime - start);
         }
         int update = dbHandle.update(StringUtils.format(sql, realParams), preParamManage.toParams());
-        if(ConfigManage.getConfig().getPrintRuntime()){
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             logger.debug("Sql执行时间: {}毫秒", System.currentTimeMillis() - buildTime);
         }
         return update;
@@ -73,18 +73,18 @@ public class Sql {
             start = System.currentTimeMillis();
         }
         IPreParamManage preParamManage = SqlHelper.getPreParamManageFactory().create();
-        Object [] realParams = new Object[params.length];
+        Object[] realParams = new Object[params.length];
         for (int i = 0; i < params.length; i++) {
             Object param = params[i];
-            realParams[i] =preParamManage.allocPreParam(param);
+            realParams[i] = preParamManage.allocPreParam(param);
         }
         Long buildTime = null;
         if (ConfigManage.getConfig().getPrintRuntime()) {
-            buildTime =System.currentTimeMillis();
+            buildTime = System.currentTimeMillis();
             logger.debug("Sql构建时间: {}毫秒", buildTime - start);
         }
         List<Map<String, Object>> select = dbHandle.select(StringUtils.format(sql, realParams), preParamManage.toParams());
-        if(ConfigManage.getConfig().getPrintRuntime()){
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             logger.debug("Sql执行时间: {}毫秒", System.currentTimeMillis() - buildTime);
         }
         return select;
@@ -97,18 +97,18 @@ public class Sql {
             start = System.currentTimeMillis();
         }
         IPreParamManage preParamManage = SqlHelper.getPreParamManageFactory().create();
-        Object [] realParams = new Object[params.length];
+        Object[] realParams = new Object[params.length];
         for (int i = 0; i < params.length; i++) {
             Object param = params[i];
-            realParams[i] =preParamManage.allocPreParam(param);
+            realParams[i] = preParamManage.allocPreParam(param);
         }
         Long buildTime = null;
         if (ConfigManage.getConfig().getPrintRuntime()) {
-            buildTime =System.currentTimeMillis();
+            buildTime = System.currentTimeMillis();
             logger.debug("Sql构建时间: {}毫秒", buildTime - start);
         }
         int delete = dbHandle.delete(StringUtils.format(sql, realParams), preParamManage.toParams());
-        if(ConfigManage.getConfig().getPrintRuntime()){
+        if (ConfigManage.getConfig().getPrintRuntime()) {
             logger.debug("Sql执行时间: {}毫秒", System.currentTimeMillis() - buildTime);
         }
         return delete;

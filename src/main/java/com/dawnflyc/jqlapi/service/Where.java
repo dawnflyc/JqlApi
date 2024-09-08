@@ -138,12 +138,13 @@ public class Where {
         return this;
     }
 
-    public Where WhereIs(String field, Object value){
-        where(field, "is" ,value);
+    public Where WhereIs(String field, Object value) {
+        where(field, "is", value);
         return this;
     }
-    public Where WhereNotIs(String field, Object value){
-        where(field, "is not" ,value);
+
+    public Where WhereNotIs(String field, Object value) {
+        where(field, "is not", value);
         return this;
     }
 
@@ -281,11 +282,11 @@ public class Where {
     /**
      * 直接写sql
      */
-    public Where where(String sql,Object [] params) {
-        Object [] realParams = new Object[params.length];
+    public Where where(String sql, Object[] params) {
+        Object[] realParams = new Object[params.length];
         for (int i = 0; i < params.length; i++) {
             Object param = params[i];
-            realParams[i] =preParamManage.allocPreParam(param);
+            realParams[i] = preParamManage.allocPreParam(param);
         }
         this.addWhere("where", StringUtils.format(sql, realParams));
         return this;

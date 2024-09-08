@@ -42,16 +42,17 @@ public class UpdateService extends WhereSql<UpdateService, Integer> {
 
     /**
      * 通过实体类修改
-     * @param entity 实体类对象
+     *
+     * @param entity       实体类对象
      * @param ignoreFields 忽略字段-类字段
      */
-    public UpdateService setByEntity(Object entity,String ... ignoreFields) {
+    public UpdateService setByEntity(Object entity, String... ignoreFields) {
         Field[] declaredFields = entity.getClass().getDeclaredFields();
         List<String> collect = Arrays.stream(declaredFields).map(Field::getName).collect(Collectors.toList());
         for (Field declaredField : declaredFields) {
-            if(!collect.contains(declaredField.getName())){
+            if (!collect.contains(declaredField.getName())) {
                 try {
-                    set(StringUtils.toUnderScoreCase(declaredField.getName()),declaredField.get(entity));
+                    set(StringUtils.toUnderScoreCase(declaredField.getName()), declaredField.get(entity));
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
@@ -80,7 +81,7 @@ public class UpdateService extends WhereSql<UpdateService, Integer> {
     }
 
     @Override
-    protected Integer query(String sql, Map<String,Object> params) {
+    protected Integer query(String sql, Map<String, Object> params) {
         return sqlHandle.update(sql, params);
     }
 }

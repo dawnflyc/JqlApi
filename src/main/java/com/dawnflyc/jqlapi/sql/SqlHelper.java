@@ -14,8 +14,8 @@ public class SqlHelper {
     private static IJqlImpl jqlImpl;
 
 
-    private static IJqlImpl getJqlImpl(){
-        if(jqlImpl==null){
+    private static IJqlImpl getJqlImpl() {
+        if (jqlImpl == null) {
             Set<Class<? extends IJqlImpl>> impls = new Reflections(new ConfigurationBuilder().forPackage("com.dawnflyc.jql.impl")).getSubTypesOf(IJqlImpl.class);
             if (impls.size() == 0) {
                 throw new RuntimeException("找不到Jql实现");
@@ -33,6 +33,10 @@ public class SqlHelper {
         return jqlImpl;
     }
 
+    public static void setJqlImpl(IJqlImpl impl) {
+        jqlImpl = impl;
+    }
+
     /**
      * 如果为空便扫描实现类
      */
@@ -42,9 +46,5 @@ public class SqlHelper {
 
     public static IPreParamManageFactory getPreParamManageFactory() {
         return getJqlImpl().getPreParamManageFactory();
-    }
-
-    public static void setJqlImpl(IJqlImpl impl){
-        jqlImpl = impl;
     }
 }

@@ -48,7 +48,7 @@ public class InsertService extends AbstractSql<InsertService, Object> {
     }
 
     @Override
-    protected Object query(String sql, Map<String,Object> params) {
+    protected Object query(String sql, Map<String, Object> params) {
         return sqlHandle.insert(sql, params);
     }
 
@@ -74,16 +74,17 @@ public class InsertService extends AbstractSql<InsertService, Object> {
 
     /**
      * 通过实体类添加
-     * @param entity 实体类对象
+     *
+     * @param entity       实体类对象
      * @param ignoreFields 忽略字段-类字段
      */
-    public InsertService addByEntity(Object entity,String ... ignoreFields) {
+    public InsertService addByEntity(Object entity, String... ignoreFields) {
         Field[] declaredFields = entity.getClass().getDeclaredFields();
         List<String> collect = Arrays.stream(declaredFields).map(Field::getName).collect(Collectors.toList());
         for (Field declaredField : declaredFields) {
-            if(!collect.contains(declaredField.getName())){
+            if (!collect.contains(declaredField.getName())) {
                 try {
-                    add(StringUtils.toUnderScoreCase(declaredField.getName()),declaredField.get(entity));
+                    add(StringUtils.toUnderScoreCase(declaredField.getName()), declaredField.get(entity));
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }

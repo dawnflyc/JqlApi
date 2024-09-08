@@ -30,7 +30,7 @@ public class DeleteService extends WhereSql<DeleteService, Integer> {
     }
 
     @Override
-    protected Integer query(String sql, Map<String,Object> params) {
+    protected Integer query(String sql, Map<String, Object> params) {
         return sqlHandle.delete(sql, params);
     }
 }

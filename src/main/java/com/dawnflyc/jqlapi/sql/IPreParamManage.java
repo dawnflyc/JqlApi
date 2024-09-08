@@ -8,6 +8,7 @@ import java.util.Map;
 public interface IPreParamManage {
     /**
      * 分配预编译
+     *
      * @param value 值
      * @return 预编译值
      */
@@ -15,6 +16,7 @@ public interface IPreParamManage {
 
     /**
      * 返回查询参数
+     *
      * @return
      */
     Map<String, Object> toParams();

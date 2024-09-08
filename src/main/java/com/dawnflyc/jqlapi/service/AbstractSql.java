@@ -18,11 +18,6 @@ import java.util.Map;
 public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractSql.class);
-
-    /**
-     * 创建时间
-     */
-    private final long time = System.currentTimeMillis();
     /**
      * mapper
      */
@@ -35,6 +30,10 @@ public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> 
      * 预编码参数管理器
      */
     protected final IPreParamManage preParamManage = SqlHelper.getPreParamManageFactory().create();
+    /**
+     * 创建时间
+     */
+    private final long time = System.currentTimeMillis();
     /**
      * 表名
      */
@@ -87,25 +86,25 @@ public abstract class AbstractSql<Children extends AbstractSql<Children, R>, R> 
      *
      * @return
      */
-    protected abstract R query(String sql,Map<String,Object> params);
+    protected abstract R query(String sql, Map<String, Object> params);
 
     public R execute() {
         long executeTime = System.currentTimeMillis();
-        if(ConfigManage.getConfig().getPrintRuntime()){
-            logger.debug("sql构建器构建时间: {}毫秒",executeTime - this.time);
+        if (ConfigManage.getConfig().getPrintRuntime()) {
+            logger.debug("sql构建器构建时间: {}毫秒", executeTime - this.time);
         }
-        R query =null;
+        R query = null;
         try {
             String sql = getSql();
             Map<String, Object> param = getStringParam();
-            if(ConfigManage.getConfig().getPrintSql()){
-                logger.debug("sql构建器，sql语句： {}",sql);
-                logger.debug("sql构建器，sql参数： {}",param);
+            if (ConfigManage.getConfig().getPrintSql()) {
+                logger.debug("sql构建器，sql语句： {}", sql);
+                logger.debug("sql构建器，sql参数： {}", param);
             }
-            query = query(sql,param);
-        }finally {
-            if(ConfigManage.getConfig().getPrintRuntime()){
-                logger.debug("sql构建器执行时间: {}毫秒",System.currentTimeMillis() - executeTime);
+            query = query(sql, param);
+        } finally {
+            if (ConfigManage.getConfig().getPrintRuntime()) {
+                logger.debug("sql构建器执行时间: {}毫秒", System.currentTimeMillis() - executeTime);
             }
         }
         preParamManage.done();
